@@ -1,0 +1,6 @@
+#content-container 
+  .my-header
+    |#{@tool_name}
+  .my-content
+    = render(partial: 'partials/result_single', locals: {items: @items})
+

@@ -1,0 +1,37 @@
+table.ui.celled.unstackable.striped.table
+  thead.color-lighter
+    tr
+      th
+        |Name
+      th
+        |date
+      th
+        |sat
+      th
+        |unsat
+      th
+        |timeout
+      th
+        |misc
+      th
+        |commit
+  tbody
+    - items.each do |item|
+      tr
+        td.collapsing
+          = link_to show_tool_path(item.tool_id) do
+            |#{item.name}
+        td.collapsing
+            |#{item.date}
+        td.positive
+          |#{item.sat}
+        td.error
+          |#{item.unsat}
+        td.warning
+          |#{item.timeout}
+        td.active
+          |#{item.misc}
+        td.collapsing.right.aligned
+          = link_to show_tool_path(item.id) do
+            |#{item.commit}
+
