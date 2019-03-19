@@ -12,6 +12,7 @@ set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_worker_timeout, nil
+set :linked_files, %w{config/master.key}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
