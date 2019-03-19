@@ -21,8 +21,8 @@ test:
   database: db/test.sqlite3
 
 production:
-    adapter: postgresql
-    encoding: unicode
-    database: ci
-    pool: 5
-    username: pguser
+  <<: *default
+  adapter: postgresql
+  database: ci
+  username: pguser
+  password: <%= ENV['CI_DB_PASSWORD'] %>
