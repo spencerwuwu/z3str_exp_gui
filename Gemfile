@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.0'
 
 gem 'rails', '~> 5.2.2'
-gem 'sqlite3', '~> 1.3.6'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -21,6 +20,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rvm'
@@ -28,9 +31,9 @@ group :development, :test do
   gem 'capistrano-rake'
   gem 'capistrano-bundler'
   gem 'capistrano3-puma'
+  gem 'sqlite3', '~> 1.3.6'
 end
 
-# Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_065523) do
+ActiveRecord::Schema.define(version: 2019_03_19_061511) do
+
+  create_table "configurations", force: :cascade do |t|
+    t.string "script_dir"
+    t.string "memory_limit"
+    t.string "benchmark_dir"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "test_results", force: :cascade do |t|
     t.string "date"
@@ -25,12 +33,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_065523) do
     t.string "name"
   end
 
-  create_table "tools", force: :cascade do |t|
-    t.string "name"
-    t.integer "test_cycle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "command"
-  end
+# Could not dump table "tools" because of following StandardError
+#   Unknown type 'bool' for column 'build_everytime'
 
 end
