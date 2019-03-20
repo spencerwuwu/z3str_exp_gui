@@ -33,7 +33,18 @@ ActiveRecord::Schema.define(version: 2019_03_19_061511) do
     t.string "name"
   end
 
-# Could not dump table "tools" because of following StandardError
-#   Unknown type 'bool' for column 'build_everytime'
+  create_table "tools", force: :cascade do |t|
+    t.string "name"
+    t.integer "test_cycle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "command"
+    t.string "lastest_commit"
+    t.date "lastest_date"
+    t.integer "days_to_run"
+    t.string "repo_url"
+    t.string "branch_name"
+    t.boolean "build_everytime"
+  end
 
 end

@@ -15,6 +15,9 @@ class ToolDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     command: Field::Text,
+    repo_url: Field::String,
+    branch_name: Field::String,
+    build_everytime: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,32 +26,34 @@ class ToolDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :test_results,
-    :id,
     :name,
     :test_cycle,
+    :branch_name,
+    :id,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :test_results,
     :id,
     :name,
     :test_cycle,
-    :command,
-    :created_at,
-    :updated_at,
+    :repo_url,
+    :branch_name,
+    :build_everytime,
+    :test_results,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :test_results,
     :name,
     :test_cycle,
     :command,
+    :repo_url,
+    :branch_name,
+    :build_everytime,
   ].freeze
 
   # Overwrite this method to customize how tools are displayed
