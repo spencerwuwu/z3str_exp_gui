@@ -1,0 +1,2 @@
+class BenchmarkName < ApplicationRecord
+end

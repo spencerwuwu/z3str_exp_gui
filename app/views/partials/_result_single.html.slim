@@ -16,24 +16,25 @@ table.ui.celled.unstackable.striped.table
       th.right.aligned
         |commit
   tbody
-    - results.each do |result|
-      tr
-        td.collapsing
-            |#{result.date}
-        td.collapsing
-            |#{result.benchmark}
-        td.positive.collapsing
-          |#{result.sat}
-        td.error.collapsing
-          |#{result.unsat}
-        td.warning.collapsing
-          |#{result.timeout}
-        td.active.collapsing
-          |#{result.misc}
-        td.collapsing.right.aligned
-          - if tool_url != nil && result.commit != "-"
-            a href="javascript:goto_commit('#{tool_url}','#{result.commit}');"
-              |#{result.commit}
-          - else
-            |-
+    - if results != nil
+      - results.each do |result|
+        tr
+          td.collapsing
+              |#{result.date}
+          td.collapsing
+              |#{result.benchmark}
+          td.positive.collapsing
+            |#{result.sat}
+          td.error.collapsing
+            |#{result.unsat}
+          td.warning.collapsing
+            |#{result.timeout}
+          td.active.collapsing
+            |#{result.misc}
+          td.collapsing.right.aligned
+            - if tool_url != nil && result.commit != "-"
+              a href="javascript:goto_commit('#{tool_url}','#{result.commit}');"
+                |#{result.commit}
+            - else
+              |-
 

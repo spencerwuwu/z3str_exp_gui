@@ -18,26 +18,27 @@ table.ui.celled.unstackable.striped.table
       th.right.aligned
         |commit
   tbody
-    - result_datas.each do |result_data|
-      tr
-        td.collapsing
-          = link_to show_tool_path(result_data.tool.id) do
-            |#{result_data.tool.name}
-        td.collapsing
-            |#{result_data.test_result.date}
-        td.collapsing
-            |#{result_data.test_result.benchmark}
-        td.positive.collapsing
-          |#{result_data.test_result.sat}
-        td.error.collapsing
-          |#{result_data.test_result.unsat}
-        td.warning.collapsing
-          |#{result_data.test_result.timeout}
-        td.active.collapsing
-          |#{result_data.test_result.misc}
-        td.collapsing.right.aligned
-          - if result_data.tool.repo_url != nil && result_data.test_result.commit != "-"
-            a href="javascript:goto_commit('#{result_data.tool.repo_url}','#{result_data.test_result.commit}');"
-              |#{result_data.test_result.commit}
-          - else
-            |-
+    - if result_datas != nil
+      - result_datas.each do |result_data|
+        tr
+          td.collapsing
+            = link_to show_tool_path(result_data.tool.id) do
+              |#{result_data.tool.name}
+          td.collapsing
+              |#{result_data.test_result.date}
+          td.collapsing
+              |#{result_data.test_result.benchmark}
+          td.positive.collapsing
+            |#{result_data.test_result.sat}
+          td.error.collapsing
+            |#{result_data.test_result.unsat}
+          td.warning.collapsing
+            |#{result_data.test_result.timeout}
+          td.active.collapsing
+            |#{result_data.test_result.misc}
+          td.collapsing.right.aligned
+            - if result_data.tool.repo_url != nil && result_data.test_result.commit != "-"
+              a href="javascript:goto_commit('#{result_data.tool.repo_url}','#{result_data.test_result.commit}');"
+                |#{result_data.test_result.commit}
+            - else
+              |-
