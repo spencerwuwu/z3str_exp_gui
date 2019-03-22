@@ -6,6 +6,8 @@ table.ui.celled.unstackable.striped.table
       th
         |date
       th
+        |benchmark
+      th
         |sat
       th
         |unsat
@@ -13,7 +15,7 @@ table.ui.celled.unstackable.striped.table
         |timeout
       th
         |misc
-      th
+      th.right.aligned
         |commit
   tbody
     - result_datas.each do |result_data|
@@ -23,13 +25,15 @@ table.ui.celled.unstackable.striped.table
             |#{result_data.tool.name}
         td.collapsing
             |#{result_data.test_result.date}
-        td.positive
+        td.collapsing
+            |#{result_data.test_result.benchmark}
+        td.positive.collapsing
           |#{result_data.test_result.sat}
-        td.error
+        td.error.collapsing
           |#{result_data.test_result.unsat}
-        td.warning
+        td.warning.collapsing
           |#{result_data.test_result.timeout}
-        td.active
+        td.active.collapsing
           |#{result_data.test_result.misc}
         td.collapsing.right.aligned
           - if result_data.tool.repo_url != nil && result_data.test_result.commit != "-"

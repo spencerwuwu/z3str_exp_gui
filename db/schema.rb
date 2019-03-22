@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_061511) do
+ActiveRecord::Schema.define(version: 2019_03_22_035835) do
 
   create_table "configurations", force: :cascade do |t|
     t.string "script_dir"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_061511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "benchmark"
   end
 
   create_table "tools", force: :cascade do |t|

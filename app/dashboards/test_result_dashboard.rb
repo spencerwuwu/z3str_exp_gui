@@ -11,6 +11,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     tool: Field::BelongsTo,
     id: Field::Number,
     date: Field::String,
+    benchmark: Field::String,
     sat: Field::Number,
     unsat: Field::Number,
     timeout: Field::Number,
@@ -27,16 +28,15 @@ class TestResultDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :tool,
-    :id,
     :date,
-    :sat,
+    :benchmark
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :tool,
-    :id,
+    :benchmark,
     :date,
     :sat,
     :unsat,
@@ -57,6 +57,7 @@ class TestResultDashboard < Administrate::BaseDashboard
     :unsat,
     :timeout,
     :misc,
+    :benchmark,
     :commit,
   ].freeze
 

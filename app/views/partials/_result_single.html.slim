@@ -4,6 +4,8 @@ table.ui.celled.unstackable.striped.table
       th
         |date
       th
+        |benchmak
+      th
         |sat
       th
         |unsat
@@ -11,20 +13,22 @@ table.ui.celled.unstackable.striped.table
         |timeout
       th
         |misc
-      th
+      th.right.aligned
         |commit
   tbody
     - results.each do |result|
       tr
         td.collapsing
             |#{result.date}
-        td.positive
+        td.collapsing
+            |#{result.benchmark}
+        td.positive.collapsing
           |#{result.sat}
-        td.error
+        td.error.collapsing
           |#{result.unsat}
-        td.warning
+        td.warning.collapsing
           |#{result.timeout}
-        td.active
+        td.active.collapsing
           |#{result.misc}
         td.collapsing.right.aligned
           - if tool_url != nil && result.commit != "-"
