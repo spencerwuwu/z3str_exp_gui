@@ -16,22 +16,24 @@ table.ui.celled.unstackable.striped.table
       th
         |commit
   tbody
-    - items.each do |item|
+    - result_datas.each do |result_data|
       tr
         td.collapsing
-          = link_to show_tool_path(item.tool_id) do
-            |#{item.name}
+          = link_to show_tool_path(result_data.tool.id) do
+            |#{result_data.tool.name}
         td.collapsing
-            |#{item.date}
+            |#{result_data.test_result.date}
         td.positive
-          |#{item.sat}
+          |#{result_data.test_result.sat}
         td.error
-          |#{item.unsat}
+          |#{result_data.test_result.unsat}
         td.warning
-          |#{item.timeout}
+          |#{result_data.test_result.timeout}
         td.active
-          |#{item.misc}
+          |#{result_data.test_result.misc}
         td.collapsing.right.aligned
-          = link_to show_tool_path(item.id) do
-            |#{item.commit}
-
+          - if result_data.tool.repo_url != nil && result_data.test_result.commit != "-"
+            a href="javascript:goto_commit('#{result_data.tool.repo_url}','#{result_data.test_result.commit}');"
+              |#{result_data.test_result.commit}
+          - else
+            |-

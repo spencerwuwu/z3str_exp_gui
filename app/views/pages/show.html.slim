@@ -1,6 +1,6 @@
 #content-container 
   .my-header
-    |#{@tool_name}
+    |#{@tool.name}
   .my-content
-    = render(partial: 'partials/result_single', locals: {items: @items})
+    = render(partial: 'partials/result_single', locals: {results: @results, tool_url: @tool.repo_url})
 

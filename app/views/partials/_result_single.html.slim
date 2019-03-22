@@ -14,19 +14,22 @@ table.ui.celled.unstackable.striped.table
       th
         |commit
   tbody
-    - items.each do |item|
+    - results.each do |result|
       tr
         td.collapsing
-            |#{item.date}
+            |#{result.date}
         td.positive
-          |#{item.sat}
+          |#{result.sat}
         td.error
-          |#{item.unsat}
+          |#{result.unsat}
         td.warning
-          |#{item.timeout}
+          |#{result.timeout}
         td.active
-          |#{item.misc}
+          |#{result.misc}
         td.collapsing.right.aligned
-          = link_to show_tool_path(item.id) do
-            |#{item.commit}
+          - if tool_url != nil && result.commit != "-"
+            a href="javascript:goto_commit('#{tool_url}','#{result.commit}');"
+              |#{result.commit}
+          - else
+            |-
 
