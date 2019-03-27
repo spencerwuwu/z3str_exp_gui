@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class BenchmarkNameDashboard < Administrate::BaseDashboard
+class BenchmarkTypeDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,9 +8,10 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    benchmark_type: Field::BelongsTo,
+    benchmark_name: Field::HasMany,
     id: Field::Number,
     name: Field::String,
+    ip: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,14 +24,18 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
+    :ip,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :benchmark_type,
     :name,
+    :ip,
+    :benchmark_name,
+    :created_at,
+    :updated_at,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -38,13 +43,13 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :benchmark_type,
+    :ip,
   ].freeze
 
-  # Overwrite this method to customize how benchmark names are displayed
+  # Overwrite this method to customize how benchmark types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(benchmark_name)
-  #   "BenchmarkName ##{benchmark_name.id}"
+  # def display_resource(benchmark_type)
+  #   "BenchmarkType ##{benchmark_type.id}"
   # end
 end

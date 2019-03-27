@@ -1,0 +1,6 @@
+#content-container 
+  - @benchmark_results.each do |benchmark_result|
+    .my-header
+      |#{benchmark_result.name}
+    .my-content
+      = render(partial: 'partials/result_table', locals: {result_datas: benchmark_result.result_datas})
