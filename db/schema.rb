@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_050048) do
+ActiveRecord::Schema.define(version: 2019_03_27_071632) do
 
   create_table "benchmark_names", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2019_03_27_050048) do
     t.string "script_dir"
     t.string "memory_limit"
     t.string "benchmark_dir"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "days_to_runs", force: :cascade do |t|
+    t.integer "benchmark_type_id"
+    t.integer "tool_id"
+    t.integer "days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

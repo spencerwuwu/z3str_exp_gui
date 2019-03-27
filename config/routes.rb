@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :tools
       resources :benchmark_names
       resources :benchmark_types
+      resources :days_to_runs
 
       root to: "test_results#index"
     end
