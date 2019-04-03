@@ -78,6 +78,32 @@ class PagesController < ApplicationController
     @benchmark_types = BenchmarkType.all
   end
 
+  def log
+    id = params[:id]
+    result = TestResult.where(:id => params[:id]).first
+    tool_name = Tool.where(:id => result.tool_id).first.name
+    dir = "/home/deploy/ci_logs_full/"
+    target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
+    target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log"
+    puts target
+    @content = File.read(target)
+
+    @benchmark_types = BenchmarkType.all
+  end
+
+  def logerr
+    id = params[:id]
+    result = TestResult.where(:id => params[:id]).first
+    tool_name = Tool.where(:id => result.tool_id).first.name
+    dir = "/home/deploy/ci_logs_full/"
+    target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
+    target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log.err"
+    puts target
+    @content = File.read(target)
+
+    @benchmark_types = BenchmarkType.all
+  end
+
   # Render pages search by benchmark_type
   def show_type
     tools = Tool.all

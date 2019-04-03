@@ -17,6 +17,8 @@ table.ui.celled.unstackable.striped.table
         |misc
       th.right.aligned
         |commit
+      th.right.aligned
+        |logs
   tbody
     - if result_datas != nil
       - result_datas.each do |result_data|
@@ -42,3 +44,9 @@ table.ui.celled.unstackable.striped.table
                 |#{result_data.test_result.commit}
             - else
               |-
+          td.collapsing.right.aligned
+            = link_to log_path(result_data.test_result.id) do
+              |log
+            |,  
+            = link_to logerr_path(result_data.test_result.id) do
+              |log.err
