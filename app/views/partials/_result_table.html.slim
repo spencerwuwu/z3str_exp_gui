@@ -12,7 +12,11 @@ table.ui.celled.unstackable.striped.table
       th
         |unsat
       th
+        |unknown
+      th
         |timeout
+      th
+        |exception
       th
         |misc
       th.right.aligned
@@ -34,8 +38,12 @@ table.ui.celled.unstackable.striped.table
             |#{result_data.test_result.sat}
           td.error.collapsing
             |#{result_data.test_result.unsat}
+          td.error.collapsing
+            |#{result_data.test_result.unknown}
           td.warning.collapsing
             |#{result_data.test_result.timeout}
+          td.warning.collapsing
+            |#{result_data.test_result.exception}
           td.active.collapsing
             |#{result_data.test_result.misc}
           td.collapsing.right.aligned

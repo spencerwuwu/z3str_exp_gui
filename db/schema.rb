@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_071632) do
+ActiveRecord::Schema.define(version: 2019_04_10_083525) do
 
   create_table "benchmark_names", force: :cascade do |t|
     t.string "name"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_071632) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "benchmark"
+    t.integer "unknown"
+    t.integer "exception"
   end
 
   create_table "tools", force: :cascade do |t|

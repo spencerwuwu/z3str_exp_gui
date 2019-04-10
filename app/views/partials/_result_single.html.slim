@@ -10,7 +10,11 @@ table.ui.celled.unstackable.striped.table
       th
         |unsat
       th
+        |unknown
+      th
         |timeout
+      th
+        |exception
       th
         |misc
       th.right.aligned
@@ -29,8 +33,12 @@ table.ui.celled.unstackable.striped.table
             |#{result.sat}
           td.error.collapsing
             |#{result.unsat}
+          td.active.collapsing
+            |#{result.unknown}
           td.warning.collapsing
             |#{result.timeout}
+          td.active.collapsing
+            |#{result.exception}
           td.active.collapsing
             |#{result.misc}
           td.collapsing.right.aligned
