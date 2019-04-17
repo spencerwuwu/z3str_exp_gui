@@ -58,6 +58,7 @@ table.ui.celled.unstackable.striped.table
             |,  
             = link_to logerr_path(result_data.test_result.id) do
               |log.err
-            |, 
-            a href="http://10.32.0.252" target="_tab"
-              |z3-trace
+            - if result_data.tool.name == "trauc"
+              |, 
+              a href="http://10.32.0.252/#{result_data.tool.name}.#{result_data.test_result.date}.#{result_data.test_result.benchmark}/" target="_tab"
+                |z3-trace

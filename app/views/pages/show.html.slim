@@ -6,5 +6,5 @@
     .my-subheader
       |#{benchmark_result.name}
     .my-content
-      = render(partial: 'partials/result_single', locals: {results: benchmark_result.result_datas, tool_url: @tool.repo_url})
+      = render(partial: 'partials/result_single', locals: {results: benchmark_result.result_datas, tool_url: @tool.repo_url, tool_name: @tool.name})
 
