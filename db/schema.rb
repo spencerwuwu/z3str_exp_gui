@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_083525) do
+ActiveRecord::Schema.define(version: 2019_04_19_042452) do
 
   create_table "benchmark_names", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2019_04_10_083525) do
     t.integer "benchmark_type_id"
     t.integer "tool_id"
     t.integer "days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "passwd"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -10,9 +10,9 @@ module Admin
 
     def authenticate_admin
       # TODO Add authentication logic here.
-      puts ENV['TRAUC_PASSWD']
+      @user = Role.all.first
       authenticate_or_request_with_http_basic('Administration') do |username, password|
-        username == 'admin' && password == ENV['TRAUC_PASSWD']
+        username == @user.name && password == @user.passwd
       end
     end
 
