@@ -10,6 +10,9 @@ module Admin
 
     def authenticate_admin
       # TODO Add authentication logic here.
+      authenticate_or_request_with_http_basic('Administration') do |username, password|
+        username == 'admin' && password == ENV['TRAUC_PASSWD'] 
+      end
     end
 
     # Override this value to specify the number of elements to display at a time
