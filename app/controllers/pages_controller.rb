@@ -85,7 +85,6 @@ class PagesController < ApplicationController
     dir = "/home/deploy/ci_logs_full/"
     target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
     target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log"
-    puts target
     @content = File.read(target)
 
     @benchmark_types = BenchmarkType.all
@@ -98,7 +97,6 @@ class PagesController < ApplicationController
     dir = "/home/deploy/ci_logs_full/"
     target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
     target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log.err"
-    puts target
     @content = File.read(target)
 
     @benchmark_types = BenchmarkType.all
