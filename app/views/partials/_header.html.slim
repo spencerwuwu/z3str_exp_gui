@@ -2,7 +2,7 @@
   .left.menu
     .header.item
       h2
-        |Z3str Tester
+        |Trau Tester
     = link_to "Home", root_path, class: "item medium text"
     - @benchmark_types.each do |benchmark_type|
       = link_to "#{benchmark_type.name}", show_type_path(benchmark_type.id), class: "item medium text"
