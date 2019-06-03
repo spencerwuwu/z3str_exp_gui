@@ -169,9 +169,11 @@ class PagesController < ApplicationController
       result2_s = target2[index].split(", ")
 
       if result1_s[2] != result2_s[2]
-        @list.append(result1_s[0])
-        @rlist1.append(result1_s[2])
-        @rlist2.append(result2_s[2])
+        if result1_s[2].include? "sat" and result2_s[2].include? "sat" 
+          @list.append(result1_s[0])
+          @rlist1.append(result1_s[2])
+          @rlist2.append(result2_s[2])
+        end
       end
     end
 
