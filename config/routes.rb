@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/benchmark_type/:id', :to => 'pages#show_type', :as => 'show_type'
   get '/log/:id', :to => 'pages#log', :as => 'log'
   get '/logerr/:id', :to => 'pages#logerr', :as => 'logerr'
+  get '/show_diff/:id1/:id2', :to => 'pages#show_diff', :as => 'show_diff'
 end

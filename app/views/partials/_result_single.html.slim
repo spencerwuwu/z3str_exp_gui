@@ -2,6 +2,8 @@ table.ui.celled.unstackable.striped.table
   thead.color-lighter
     tr
       th
+        |id
+      th
         |date
       th
         |benchmak
@@ -25,6 +27,8 @@ table.ui.celled.unstackable.striped.table
     - if results != nil
       - results.each do |result|
         tr
+          td.collapsing
+              |#{result.id}
           td.collapsing
               |#{result.date}
           td.collapsing
@@ -53,7 +57,7 @@ table.ui.celled.unstackable.striped.table
               |log
             |,  
             = link_to logerr_path(result.id) do
-              |log.err
+              |log.full
             - if tool_name == "trauc"
               |, 
               a href="http://trauc.iis.sinica.edu.tw/z3-trace/#{tool_name}.#{result.date}.#{result.benchmark}/" target="_tab"

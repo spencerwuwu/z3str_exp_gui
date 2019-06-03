@@ -1,0 +1,25 @@
+#content-container 
+  .my-content
+    - if @error
+      h1 Can't compare different benchmark
+    - else
+      table.ui.celled.unstackable.striped.table
+        thead.color-lighter
+          tr
+            th
+              |file
+            th
+              |#{@tname_1}
+            th
+              |#{@tname_2}
+        tbody
+        - @list.each_with_index do |item, index|
+          tr
+            td
+              |#{item}
+            td
+              |#{@rlist1[index]}
+            td
+              |#{@rlist2[index]}
+
+

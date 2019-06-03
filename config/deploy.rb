@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "ci"
-set :repo_url, "git@github.com:spencerwuwu/z3str_exp_gui.git"
+set :repo_url, "git@github.com:spencerwuwu/trauc_ci.git"
 set :user, 'deploy'
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 

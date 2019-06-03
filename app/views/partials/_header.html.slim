@@ -3,9 +3,23 @@
     .header.item
       h2
         |Trau Tester
+    = link_to "Manual_Tester", "http://10.32.0.210/", class: "item large text"
     = link_to "Home", root_path, class: "item medium text"
     - @benchmark_types.each do |benchmark_type|
       = link_to "#{benchmark_type.name}", show_type_path(benchmark_type.id), class: "item medium text"
 
 
 
+#diff-content
+  form.ui.form
+    .field
+      label
+        |Compare log
+        .three.fields
+          .field
+            input type="text" name="r_id1" placeholder="Result id" id="r_id1"
+          .field
+            input type="text" name="r_id2" placeholder="Result id" id="r_id2"
+          .field
+            .ui.button onClick="compare_log();"
+              |Submit
