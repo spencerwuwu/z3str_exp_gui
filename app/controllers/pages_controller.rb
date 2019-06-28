@@ -57,7 +57,7 @@ class PagesController < ApplicationController
       @benchmark_results << benchmark_result
     end
 
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
   # Controller for show.html.slim
@@ -75,7 +75,7 @@ class PagesController < ApplicationController
       end
     end
   
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
   def log
@@ -89,7 +89,7 @@ class PagesController < ApplicationController
     target = "#{target_dir}#{result.benchmark}.#{result.date}.#{tool_name}.log"
     @content = File.read(target)
 
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
   def logerr
@@ -103,13 +103,23 @@ class PagesController < ApplicationController
     target = "#{target_dir}#{result.benchmark}.#{result.date}.#{tool_name}.log.err"
     @content = File.read(target)
 
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
   # Render pages search by benchmark_type
   def show_type
     tools = Tool.all
-    benchmarks = BenchmarkName.where(:benchmark_type_id => params[:id])
+    display_type = params[:id].to_i
+    benchmarks = []
+    all_benches = BenchmarkName.all()
+    all_types  = BenchmarkType.all()
+
+    all_benches.each do |benchmark|
+      type_id = all_types.find(benchmark.benchmark_type_id).display_type_id
+      if display_type == type_id
+        benchmarks << benchmark
+      end
+    end
 
     @benchmark_results = []
 
@@ -126,7 +136,7 @@ class PagesController < ApplicationController
       @benchmark_results << benchmark_result
     end
   
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
 
@@ -177,7 +187,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @benchmark_types = BenchmarkType.all
+    @display_types = DisplayType.all
   end
 
 end

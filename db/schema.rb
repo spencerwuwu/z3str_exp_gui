@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_19_042452) do
+ActiveRecord::Schema.define(version: 2019_06_27_075635) do
 
   create_table "benchmark_names", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_04_19_042452) do
     t.string "ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "display_type_id"
   end
 
   create_table "configurations", force: :cascade do |t|
@@ -38,6 +39,12 @@ ActiveRecord::Schema.define(version: 2019_04_19_042452) do
     t.integer "benchmark_type_id"
     t.integer "tool_id"
     t.integer "days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "display_types", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

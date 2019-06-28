@@ -1,0 +1,2 @@
+class DisplayType < ApplicationRecord
+end
