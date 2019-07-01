@@ -4,18 +4,42 @@ class PagesController < ApplicationController
   class ResultData
     @tool
     @test_result
+    @is_splited
+    @children
+    @group_id
 
-    def initialize(tool_data, result)
+    def initialize(tool_data, result, is_splited)
       @tool = tool_data
       @test_result = result
+      @is_splited = is_splited
+    end
+
+    def set_children(children)
+      @children = children
+    end
+
+    def set_id(id)
+      @group_id = id
     end
 
     def tool
       return @tool
     end
 
+    def is_splited
+      return @is_splited
+    end
+
     def test_result
       return @test_result
+    end
+
+    def children
+      return @children
+    end
+
+    def group_id
+      return @group_id
     end
   end
 
@@ -44,12 +68,12 @@ class PagesController < ApplicationController
 
     @benchmark_results = []
 
-    benchmarks.each do |benchmark|
+    benchmarks.where(:benchmark_splited_id => nil).each do |benchmark|
       result_datas = []
       tools.each do |tool|
         test_result = TestResult.where(:tool_id => tool.id, :benchmark => benchmark.name).order("created_at DESC").first
         if test_result != nil
-          result = ResultData.new(tool, test_result)
+          result = ResultData.new(tool, test_result, false)
           result_datas << result
         end
       end
@@ -57,12 +81,57 @@ class PagesController < ApplicationController
       @benchmark_results << benchmark_result
     end
 
+    bs_cnt = 0
+
+    BenchmarkSplited.all.each do |bs|
+      total_datas = []
+
+      tools.each do |tool|
+        result_datas = []
+        summary = TestResult.new({date: "", sat: 0, unsat: 0, timeout: 0, misc: 0, tool_id: tool.id, benchmark: bs.name, name: tool.name, unknown: 0, exception: 0})
+        c_date = 0
+
+        benchmarks.where(:benchmark_splited_id => bs.id).each do |benchmark|
+          test_result = TestResult.where(:tool_id => tool.id, :benchmark => benchmark.name).order("created_at DESC").first
+          if test_result != nil
+            result = ResultData.new(tool, test_result, false)
+            result_datas << result
+            summary.sat += test_result.sat
+            summary.unsat += test_result.unsat
+            summary.timeout += test_result.timeout
+            summary.misc += test_result.misc
+            summary.unknown += test_result.unknown
+            summary.exception += test_result.exception
+            n_date = test_result.date.to_i
+            if n_date > c_date
+              c_date = n_date
+            end
+          end
+          if c_date != 0
+            summary.date = c_date.to_s
+          end
+          # End for benchmarks.where...
+        end
+
+        total = ResultData.new(tool, summary, true)
+        total.set_children(result_datas)
+        total.set_id(bs_cnt)
+        bs_cnt += 1
+
+        total_datas << total
+        # End for tools.each
+      end
+      benchmark_result = BenchmarkResult.new(bs.name, total_datas)
+      @benchmark_results << benchmark_result
+      # End for BenchmarkSplited
+    end
+
     @display_types = DisplayType.all
   end
 
   # Controller for show.html.slim
   def show
-    benchmarks = BenchmarkName.all
+    benchmarks = BenchmarkName.where(:benchmark_splited_id => nil)
     @tool = Tool.where(:id => params[:id]).first
 
     @benchmark_results = []
@@ -83,9 +152,7 @@ class PagesController < ApplicationController
     result = TestResult.where(:id => params[:id]).first
     tool_name = Tool.where(:id => result.tool_id).first.name
     dir = "/home/deploy/ci_logs_full/"
-    #target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
     target_dir = "#{dir}#{tool_name}-#{result.date}-#{result.benchmark}/"
-    #target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log"
     target = "#{target_dir}#{result.benchmark}.#{result.date}.#{tool_name}.log"
     @content = File.read(target)
 
@@ -97,9 +164,7 @@ class PagesController < ApplicationController
     result = TestResult.where(:id => params[:id]).first
     tool_name = Tool.where(:id => result.tool_id).first.name
     dir = "/home/deploy/ci_logs_full/"
-    #target_dir = dir + tool_name + "-" + result.date + "-" + result.benchmark + "/"
     target_dir = "#{dir}#{tool_name}-#{result.date}-#{result.benchmark}/"
-    #target = target_dir + result.benchmark + "." + result.date + "." + tool_name + ".log"
     target = "#{target_dir}#{result.benchmark}.#{result.date}.#{tool_name}.log.err"
     @content = File.read(target)
 
@@ -111,7 +176,7 @@ class PagesController < ApplicationController
     tools = Tool.all
     display_type = params[:id].to_i
     benchmarks = []
-    all_benches = BenchmarkName.all()
+    all_benches = BenchmarkName.where(:benchmark_splited_id => nil)
     all_types  = BenchmarkType.all()
 
     all_benches.each do |benchmark|
@@ -128,7 +193,7 @@ class PagesController < ApplicationController
       tools.each do |tool|
         test_result = TestResult.where(:tool_id => tool.id, :benchmark => benchmark.name).order("created_at DESC").first
         if test_result != nil
-          result = ResultData.new(tool, test_result)
+          result = ResultData.new(tool, test_result, false)
           result_datas << result
         end
       end

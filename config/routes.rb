@@ -3,6 +3,7 @@ Rails.application.routes.draw do
       resources :test_results
       resources :tools
       resources :benchmark_names
+      resources :benchmark_spliteds
       resources :benchmark_types
       resources :days_to_runs
       resources :display_types

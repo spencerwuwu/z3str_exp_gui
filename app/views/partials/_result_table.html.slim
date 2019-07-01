@@ -26,11 +26,15 @@ table.ui.celled.unstackable.striped.table
       th.right.aligned
         |logs
   tbody
-    - if result_datas != nil
+    - if result_datas != nil 
       - result_datas.each do |result_data|
         tr
           td.collapsing
-              |#{result_data.test_result.id}
+            - if not result_data.is_splited
+                |#{result_data.test_result.id}
+            - else
+              a id="spliter_#{result_data.group_id}" onclick="open_splited(#{result_data.group_id});" style="cursor: pointer"
+                i.angle.down.icon
           td.collapsing
             = link_to show_tool_path(result_data.tool.id) do
               |#{result_data.tool.name}
@@ -48,7 +52,7 @@ table.ui.celled.unstackable.striped.table
             |#{result_data.test_result.timeout}
           td.warning.collapsing
             |#{result_data.test_result.exception}
-          td.active.collapsing
+          td.error.collapsing
             |#{result_data.test_result.misc}
           td.collapsing.right.aligned
             - if result_data.tool.repo_url != nil && result_data.test_result.commit != "-"
@@ -57,12 +61,52 @@ table.ui.celled.unstackable.striped.table
             - else
               |-
           td.collapsing.right.aligned
-            = link_to log_path(result_data.test_result.id) do
-              |log
-            |,  
-            = link_to logerr_path(result_data.test_result.id) do
-              |log.full
-            - if result_data.tool.name == "trauc"
-              |, 
-              a href="http://trauc.iis.sinica.edu.tw/z3-trace/#{result_data.tool.name}.#{result_data.test_result.date}.#{result_data.test_result.benchmark}/" target="_tab"
-                |z3-trace
+            - if not result_data.is_splited
+              = link_to log_path(result_data.test_result.id) do
+                |log
+              |,  
+              = link_to logerr_path(result_data.test_result.id) do
+                |log.full
+              - if result_data.tool.name == "trauc"
+                |, 
+                a href="http://trauc.iis.sinica.edu.tw/z3-trace/#{result_data.tool.name}.#{result_data.test_result.date}.#{result_data.test_result.benchmark}/" target="_tab"
+                  |z3-trace
+        - if result_data.is_splited
+          - result_data.children.each do |inner_data|
+            tr class="splited_#{result_data.group_id}" style="display: none"
+              td.collapsing
+                |#{inner_data.test_result.id}
+              td.collapsing.disabled
+                |#{inner_data.tool.name}
+              td.collapsing.disabled
+                |#{inner_data.test_result.date}
+              td.collapsing.disabled
+                |#{inner_data.test_result.benchmark}
+              td.collapsing
+                |#{inner_data.test_result.sat}
+              td.collapsing
+                |#{inner_data.test_result.unsat}
+              td.collapsing
+                |#{inner_data.test_result.unknown}
+              td.collapsing
+                |#{inner_data.test_result.timeout}
+              td.collapsing
+                |#{inner_data.test_result.exception}
+              td.collapsing
+                |#{inner_data.test_result.misc}
+              td.collapsing.right.aligned
+                - if inner_data.tool.repo_url != nil && inner_data.test_result.commit != "-"
+                  a href="javascript:goto_commit('#{inner_data.tool.repo_url}','#{inner_data.test_result.commit}');"
+                    |#{inner_data.test_result.commit}
+                - else
+                  |-
+              td.collapsing.right.aligned
+                = link_to log_path(inner_data.test_result.id) do
+                  |log
+                |,  
+                = link_to logerr_path(inner_data.test_result.id) do
+                  |log.full
+                - if inner_data.tool.name == "trauc"
+                  |, 
+                  a href="http://trauc.iis.sinica.edu.tw/z3-trace/#{inner_data.tool.name}.#{inner_data.test_result.date}.#{inner_data.test_result.benchmark}/" target="_tab"
+                    |z3-trace

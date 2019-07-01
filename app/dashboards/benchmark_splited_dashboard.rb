@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class BenchmarkNameDashboard < Administrate::BaseDashboard
+class BenchmarkSplitedDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,10 +8,10 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    benchmark_type: Field::BelongsTo,
+    benchmark_names: Field::HasMany,
+    display_type: Field::BelongsTo,
     id: Field::Number,
     name: Field::String,
-    benchmark_splited_id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,16 +24,17 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :benchmark_splited_id,
+    :display_type,
+    :benchmark_names,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
-    :benchmark_type,
-    :benchmark_splited_id,
     :name,
+    :display_type,
+    :benchmark_names,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -41,14 +42,14 @@ class BenchmarkNameDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :benchmark_type,
-    :benchmark_splited_id,
+    :display_type,
+    :benchmark_names,
   ].freeze
 
-  # Overwrite this method to customize how benchmark names are displayed
+  # Overwrite this method to customize how benchmark spliteds are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(benchmark_name)
-  #   "BenchmarkName ##{benchmark_name.id}"
+  # def display_resource(benchmark_splited)
+  #   "BenchmarkSplited ##{benchmark_splited.id}"
   # end
 end

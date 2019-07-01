@@ -8,7 +8,8 @@ class BenchmarkTypeDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    benchmark_name: Field::HasMany,
+    benchmark_names: Field::HasMany,
+    days_to_runs: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     ip: Field::String,
@@ -35,8 +36,9 @@ class BenchmarkTypeDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :ip,
-    :benchmark_name,
     :display_type,
+    :benchmark_names,
+    :days_to_runs,
     :created_at,
     :updated_at,
   ].freeze

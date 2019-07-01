@@ -8,3 +8,22 @@ function compare_log() {
   id2 = document.getElementById("r_id2").value;
   window.open("/show_diff/" + id1 + "/" + id2, '_blank');
 }
+
+function open_splited(id) {
+  controller = document.getElementById("spliter_" + id);
+  targets = document.getElementsByClassName("splited_" + id);
+
+  if (targets.length <= 0) return;
+
+  if (targets[0].style.display == "none") {
+    for (i = 0; i < targets.length; i++) {
+      targets[i].style.display = "table-row";
+    }
+    controller.innerHTML = "<i class='angle up icon'></i>"
+  } else {
+    for (i = 0; i < targets.length; i++) {
+      targets[i].style.display = "none";
+    }
+    controller.innerHTML = "<i class='angle down icon'></i>"
+  }
+}

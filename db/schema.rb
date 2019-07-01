@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_075635) do
+ActiveRecord::Schema.define(version: 2019_07_01_040826) do
 
   create_table "benchmark_names", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "benchmark_type_id"
+    t.integer "benchmark_splited_id"
+  end
+
+  create_table "benchmark_spliteds", force: :cascade do |t|
+    t.string "name"
+    t.integer "display_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "benchmark_types", force: :cascade do |t|
