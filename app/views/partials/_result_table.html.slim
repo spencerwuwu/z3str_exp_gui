@@ -60,8 +60,8 @@ table.ui.celled.unstackable.striped.table
                 |#{result_data.test_result.commit}
             - else
               |-
-          td.collapsing.right.aligned
-            - if not result_data.is_splited
+          - if not result_data.is_splited
+            td.collapsing.right.aligned
               = link_to log_path(result_data.test_result.id) do
                 |log
               |,  
@@ -71,6 +71,9 @@ table.ui.celled.unstackable.striped.table
                 |, 
                 a href="http://trauc.iis.sinica.edu.tw/z3-trace/#{result_data.tool.name}.#{result_data.test_result.date}.#{result_data.test_result.benchmark}/" target="_tab"
                   |z3-trace
+          - else
+            td.collapsing.right.aligned.disabled
+              |log, log.full, z3-trace
         - if result_data.is_splited
           - result_data.children.each do |inner_data|
             tr class="splited_#{result_data.group_id}" style="display: none"
