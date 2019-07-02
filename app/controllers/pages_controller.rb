@@ -290,6 +290,7 @@ class PagesController < ApplicationController
     @rlist1 = []
     @rlist2 = []
 
+    level = params[:level].to_i
     target1.each_with_index do |value, index|
       if index <= 3
         next
@@ -298,7 +299,19 @@ class PagesController < ApplicationController
       result2_s = target2[index].split(", ")
 
       if result1_s[2] != result2_s[2]
-        if result1_s[2].include? "sat" and result2_s[2].include? "sat" 
+        if level == 0
+          if result1_s[2].include? "sat" and result2_s[2].include? "sat" 
+            @list.append(result1_s[0])
+            @rlist1.append(result1_s[2])
+            @rlist2.append(result2_s[2])
+          end
+        elsif level == 1
+          if result1_s[2].include? "timeout" or result2_s[2].include? "timeout" 
+            @list.append(result1_s[0])
+            @rlist1.append(result1_s[2])
+            @rlist2.append(result2_s[2])
+          end
+        else
           @list.append(result1_s[0])
           @rlist1.append(result1_s[2])
           @rlist2.append(result2_s[2])

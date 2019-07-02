@@ -15,11 +15,24 @@
     .field
       label
         |Compare log
-        .three.fields
-          .field
+        .fields
+          .seven.wide.field
+            .two.fields
+              .field
+                .ui.radio.checkbox
+                  input type="radio" name="r_difftype" value="0"
+                  label sat/unsat 
+              .field
+                .ui.radio.checkbox
+                  input type="radio" name="r_difftype" value="1"
+                  label timeout
+                .ui.radio.checkbox
+                  input type="radio" name="r_difftype" value="2"
+                  label all_diff
+          .three.wide.field
             input type="text" name="r_id1" placeholder="Result id" id="r_id1"
-          .field
+          .three.wide.field
             input type="text" name="r_id2" placeholder="Result id" id="r_id2"
-          .field
+          .three.wide.field
             .ui.button onClick="compare_log();"
               |Submit

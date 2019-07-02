@@ -4,9 +4,17 @@ function goto_commit(url, commit) {
 }
 
 function compare_log() {
+  levels = document.getElementsByName("r_difftype");
+  level = 2
+  for (i = 0; i < levels.length; i++) {
+    if (levels[i].checked) {
+      level = levels[i].value;
+      break;
+    }
+  }
   id1 = document.getElementById("r_id1").value;
   id2 = document.getElementById("r_id2").value;
-  window.open("/show_diff/" + id1 + "/" + id2, '_blank');
+  window.open("/show_diff/" + id1 + "/" + id2 + "/" + level, '_blank');
 }
 
 function open_splited(id) {
