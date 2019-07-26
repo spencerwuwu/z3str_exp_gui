@@ -64,7 +64,9 @@ class PagesController < ApplicationController
   # Controller for index.html.slim
   def index
     tools = Tool.all
-    benchmarks = BenchmarkName.all
+    legacy_id = DisplayType.where(:name => "legacy").first.id
+    legacy_types_ids = BenchmarkType.where(:display_type_id => legacy_id).map(&:id)
+    benchmarks = BenchmarkName.where.not(benchmark_type_id:  legacy_types_ids)
 
     @benchmark_results = []
 
